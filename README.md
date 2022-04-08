@@ -1,16 +1,14 @@
 # k8s-vms
-
-## 목적
 Virtual Box와 Vagrant를 사용하여 Kubernetes Cluster를 쉽게 구성하는 방법을 설명합니다. 
 
 ## 환경
 * OS: Ubuntu 20.04
 * HW: Intel 10700K, 32GB Memory
 
-제 환경과 다르더라도 Vagrantfile를 실행할 수 있는 Windows, Mac OS에서도 적용이 가능해보입니다. (시도해본 분 계시면 알려주세요~.)
+제 환경과 다르더라도 Vagrantfile를 실행할 수 있는 Windows, Mac OS에서도 적용이 가능해보입니다. (시도해본 분 계시면 알려주세요~)
 
 ## 설치 순서
-Virutal Box와 Vagrant를 사전 설치가 필요합니다. 아래 공식 홈페이지에서 본인에 맞는 release를 설치합니다.
+Virutal Box와 Vagrant의 사전 설치가 필요합니다. 아래 공식 홈페이지에서 본인에 맞는 release를 설치합니다.
 * [Virutal Box](https://www.virtualbox.org/)
 * [Vagrant](https://www.vagrantup.com/)
 
@@ -23,7 +21,8 @@ $ vagarnt up
 ```
 
 ## VM 설정
-본인의 PC 사양 및 환경을 고려하여 VM을 조절해아할 수 있습니다. 아래에 주요 설정 항목 및 방법을 설명하였습니다.
+PC 사양 및 환경을 고려하여 VM을 조절해아할 수 있습니다. 아래에 주요 설정 항목 및 방법을 설명하였습니다.
+
 ### Vagrantfile
 docker의 dockerfile과 유사한 역할로 VM의 Base OS, 사용 자원 등을 설정합니다. 
 * num_node = 3
