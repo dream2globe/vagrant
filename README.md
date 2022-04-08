@@ -18,6 +18,8 @@ Virutal Box와 Vagrant의 사전 설치가 필요합니다. 아래 공식 홈페
 $ git clone https://github.com/dream2globe/k8s-vms.git
 $ cd k8s-vms
 $ vagarnt up
+$ vagarnt ssh k8sm1  # 가상머신 master ssh 접속
+$ k get nodes  # cluster node 확인
 ```
 
 ## VM 설정
