@@ -12,13 +12,13 @@ Virutal Box와 Vagrant의 사전 설치가 필요합니다. 아래 공식 홈페
 * [Virutal Box](https://www.virtualbox.org/)
 * [Vagrant](https://www.vagrantup.com/)
 
-다음 프로젝트를 구성할 폴더를 생성하고 VM 설정이 담긴 파일들을 복사합니다. 이후 생성된 폴더로 이동 후 `vagant up` 명령어를 실행합니다. 모든 작업은 끝났습니다. 1개의 master node와 3개의 worker node로 구성된 cluster가 생성될 때 까지 기다리면 됩니다.
+다음 프로젝트를 구성할 폴더를 생성하고 VM 설정이 담긴 파일들을 복사합니다. 이후 생성된 폴더로 이동 후 `vagrant up` 명령어를 실행합니다. 모든 작업은 끝났습니다. 1개의 master node와 3개의 worker node로 구성된 cluster가 생성될 때까지 기다리면 됩니다.
 
 ```
 $ git clone https://github.com/dream2globe/k8s-vms.git
 $ cd k8s-vms
-$ vagarnt up
-$ vagarnt ssh k8sm1  # 가상머신 master ssh 접속
+$ vagrant up
+$ vagrant ssh k8sm1  # 가상머신 master ssh 접속
 $ k get nodes  # cluster node 확인
 ```
 
