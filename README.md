@@ -55,4 +55,4 @@ Vagrant는 VM 전체를 단순한 명령어로 쉽게 제어할 수 있습니다
 * `vagrant destroy`: 모든 VM 제거
 * `vagrant box list`: 설치되어 있는 Box(Container의 Image와 유사 개념)
 
-이외 명령어는 [Vagrant Tutorial](https://learn.hashicorp.com/tutorials/vagrant/getting-started-up?in=vagrant/getting-started)에 친절하게 소개하고 있으니 꼭 참고해보시길 추천합니다.
+이외 명령어는 [Vagrant Tutorial](https://learn.hashicorp.com/collections/vagrant/getting-started)에 친절하게 소개하고 있으니 꼭 참고해보시길 추천합니다.
