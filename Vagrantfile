@@ -89,17 +89,17 @@ Vagrant.configure("2") do |config|
   config.vm.provision :shell, privileged: true,  path: "vagrant_k8s_common.sh"
 
   # Main node
-  config.vm.define "k8sm1" do |main|
-    main.vm.hostname = "k8sm1"
-    main.vm.network "private_network", ip: "192.168.56.21"
-    main.vm.provision :shell, privileged: false, path: "vagrant_k8s_main.sh"
+  config.vm.define "k8sm1" do |master|
+    master.vm.hostname = "kmaster"
+    master.vm.network "private_network", ip: "192.168.56.100"
+    master.vm.provision :shell, privileged: false, path: "vagrant_k8s_main.sh"
   end
 
   # Worker nodes
   (1..num_node).each do |i|
     config.vm.define "k8sw#{i}" do |worker| 
-      worker.vm.hostname = "k8sw#{i}"
-      worker.vm.network "private_network", ip: "192.168.56.#{i + 21}"
+      worker.vm.hostname = "kworker#{i}"
+      worker.vm.network "private_network", ip: "192.168.56.#{i + 100}"
       #worker.vm.disk :disk, size: "10GB", name: "extra-disk"
       worker.vm.provision :shell,
         privileged: true,

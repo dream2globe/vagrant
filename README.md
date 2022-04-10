@@ -3,7 +3,7 @@ Virtual Box와 Vagrant를 사용하여 Kubernetes Cluster를 쉽게 구성하는
 
 ## 환경
 * OS: Ubuntu 20.04
-* HW: Intel 10700K, 32GB Memory
+* HW: Intel 10700K, 32GB Memory. 1TB SSD
 
 제 환경과 다르더라도 Vagrantfile를 실행할 수 있는 Windows, Mac OS에서도 적용이 가능해보입니다. (시도해본 분 계시면 알려주세요~)
 
@@ -56,3 +56,6 @@ Vagrant는 VM 전체를 단순한 명령어로 쉽게 제어할 수 있습니다
 * `vagrant box list`: 설치되어 있는 Box(Container의 Image와 유사 개념)
 
 이외 명령어는 [Vagrant Tutorial](https://learn.hashicorp.com/tutorials/vagrant/getting-started-up?in=vagrant/getting-started)에 친절하게 소개하고 있으니 꼭 참고해보시길 추천합니다.
+
+## Release
+* MetalLB 설정이 추가되었습니다. 자세한 내용은 [README.md](./ecos/metallb/README.md)를 확인하세요.

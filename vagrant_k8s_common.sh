@@ -6,10 +6,10 @@ swapoff -a && sed -i '/ swap / s/^/#/' /etc/fstab  # swap off
 
 # host
 cat << EOF >> /etc/hosts
-192.168.56.21   k8sm1
-192.168.56.22   k8sw1
-192.168.56.23   k8sw2
-192.168.56.24	k8sw3
+192.168.56.100  kmaster
+192.168.56.101  kworker1
+192.168.56.102  kworker2
+192.168.56.103  kworker3
 EOF
 
 # install docker
@@ -21,7 +21,7 @@ newgrp docker
 
 # docker 
 sudo mkdir -p /etc/docker
-cat <<EOF | sudo tee /etc/docker/daemon.json
+cat << EOF | sudo tee /etc/docker/daemon.json
 {
 "exec-opts": ["native.cgroupdriver=systemd"],
 "log-driver": "json-file",
