@@ -29,7 +29,7 @@ MetalLB를 사용하면 온프레미스 환경의 K8S에서도 LoadBalance의 IP
 
 ```bash
 $ vagrant ssh kmaster  # kamster ssh 접속
-$ sh /vagrant/ecos/metallb/metallb.sh  # pod 배포
+$ sh /vagrant/metallb.sh  # pod 배포
 ```
 
 ## VM 설정
