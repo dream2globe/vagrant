@@ -8,6 +8,8 @@ Virtual Box와 Vagrant를 사용하여 Kubernetes Cluster를 쉽게 구성하는
 제 환경과 다르더라도 Vagrantfile를 실행할 수 있는 Windows, Mac OS에서도 적용이 가능해보입니다. (시도해본 분 계시면 알려주세요~)
 
 ## 설치 순서
+
+### K8S Cluster
 Virutal Box와 Vagrant의 사전 설치가 필요합니다. 아래 공식 홈페이지에서 본인에 맞는 release를 설치합니다.
 * [Virutal Box](https://www.virtualbox.org/)
 * [Vagrant](https://www.vagrantup.com/)
@@ -18,8 +20,18 @@ Virutal Box와 Vagrant의 사전 설치가 필요합니다. 아래 공식 홈페
 $ git clone https://github.com/dream2globe/k8s-vms.git
 $ cd k8s-vms
 $ vagrant up
-$ vagrant ssh k8sm1  # 가상머신 master ssh 접속
+$ vagrant ssh kmaster  # 가상머신 master ssh 접속
 $ k get nodes  # cluster node 확인
+```
+
+### (Optional)
+
+## MetalLB
+MetalLB를 사용하면 온프레미스 환경의 K8S에서도 LoadBalance의 IP를 자동으로 할당할 수 있습니다. 자세한 내용은 하위 폴더의 [README.md](./ecos/metallb/README.md)를 참조하세요.
+
+```bash
+$ vagrant ssh kmaster  # kamster ssh 접속
+$ sh /vagrant/ecos/metallb/metallb.sh  # pod 배포
 ```
 
 ## VM 설정
@@ -34,7 +46,7 @@ docker의 dockerfile과 유사한 역할로 VM의 Base OS, 사용 자원 등을 
 * vb.memory = "4096" / vb.cpus = "3"
   * VM에 할당될 메모리와 CPU core 수
   * 4개의 VM이 설치되므로, 총 16GB/12core가 할당됨
-  * K8S는 노드당 최소 2core, 2GB가 필요하므로 최소 노드로 설정했음에도 용량이 부족한 경우에는 worker 수 조절 필요
+  * K8S는 노드당 최소 2core, 2GB(ceph 추가 시 최소 4GB 권장)가 필요하므로 최소 노드로 설정했음에도 용량이 부족한 경우에는 worker 수 조절 필요
 * config.vm.provision :shell, privileged: true,  path: "vagrant_k8s_common.sh"
   * 필요한 패키지 및 환경 설정을 위한 shell 명령어
   * privileged(boolean): sudo 권한 유무
@@ -58,4 +70,4 @@ Vagrant는 VM 전체를 단순한 명령어로 쉽게 제어할 수 있습니다
 이외 명령어는 [Vagrant Tutorial](https://learn.hashicorp.com/collections/vagrant/getting-started)에 친절하게 소개하고 있으니 꼭 참고해보시길 추천합니다.
 
 ## Release
-* MetalLB 설정이 추가되었습니다. 자세한 내용은 [README.md](./ecos/metallb/README.md)를 확인하세요.
+* (2022.04.10) MetalLB 설정 방법이 추가되었습니다.

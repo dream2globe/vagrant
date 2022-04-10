@@ -6,10 +6,10 @@ swapoff -a && sed -i '/ swap / s/^/#/' /etc/fstab  # swap off
 
 # host
 cat << EOF >> /etc/hosts
-192.168.56.100  kmaster
-192.168.56.101  kworker1
-192.168.56.102  kworker2
-192.168.56.103  kworker3
+192.168.56.20  kmaster
+192.168.56.21  kworker1
+192.168.56.22  kworker2
+192.168.56.23  kworker3
 EOF
 
 # install docker
