@@ -23,18 +23,4 @@ source ~/.bashrc
 # metallb
 kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.12.1/manifests/namespace.yaml
 kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.12.1/manifests/metallb.yaml
-cat << EOF >> configmap_to_set_service_ip_range.yaml
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  namespace: metallb-system
-  name: config
-data:
-  config: |
-    address-pools:
-    - name: default
-      protocol: layer2
-      addresses:
-      - 192.168.56.230-192.168.56.250
-EOF
-kubectl create -f configmap_to_set_service_ip_range.yaml
+kubectl create -f ./ecos/metallb/configmap_to_set_service_ip_range.yaml

@@ -1,8 +1,8 @@
 # MetalLB Configuration
 MetalLB는 LoadBalance로 노출하려는 service에 ip를 자동으로 할당합니다. 본 문서는 MetalLB의 "Layer 2 Configuration" 방법을 활용하여 할당 가능한 ip 대역을 설정하는 방법을 설명합니다. 자세한 내용은 [MetalLB 홈페이지](https://metallb.universe.tf/)를 참조하세요. 사용한 버전은 (MetalLB v0.12.1) 입니다.
 
-* [Network 확인](##Network 확인)
-* [configmap으로 ip대역 설정](## configmap으로 ip대역 설정)
+* [Network-확인](#network-확인)
+* [Configmap으로-ip대역-설정](#configmap으로-ip대역-설정)
 
 ## Network 확인
 명령어 `ip a s`를 입력하여 VirtualBox가 사용하는 network bridge를 확인합니다.
@@ -59,7 +59,7 @@ Network range		- 192.168.56.0 - 192.168.56.255
 Usable range		- 192.168.56.1 - 192.168.56.254
 ```
 
-## configmap으로 ip대역 설정
+## Configmap으로 ip대역 설정
 아래는 사용 가능한 ip 대역 중 끝부분의 20개 ip를 자동 할당하도록 설정한 예시입니다. 
 
 ```yaml
