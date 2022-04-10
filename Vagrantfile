@@ -97,10 +97,10 @@ Vagrant.configure("2") do |config|
 
   # Worker nodes
   (1..num_node).each do |i|
-    config.vm.define "kworker#{i}" do |worker| 
+    config.vm.define "kworker#{i}" do |worker|
+      worker.vm.disk :disk, size: "20GB", name: "blue-store#{i}"  
       worker.vm.hostname = "kworker#{i}"
       worker.vm.network "private_network", ip: "192.168.56.#{i + 20}"
-      #worker.vm.disk :disk, size: "10GB", name: "extra-disk"
       worker.vm.provision :shell,
         privileged: true,
         inline: "/bin/sh /vagrant/k8s_join.sh"

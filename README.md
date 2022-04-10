@@ -19,6 +19,7 @@ Virutal Box와 Vagrant의 사전 설치가 필요합니다. 아래 공식 홈페
 ```
 $ git clone https://github.com/dream2globe/k8s-vms.git
 $ cd k8s-vms
+$ export VAGRANT_EXPERIMENTAL="disks"  # 디스크 추가를 위한 실험기능 활성화(ceph 설치 시에만 필요)
 $ vagrant up
 $ vagrant ssh kmaster  # 가상머신 master ssh 접속
 $ k get nodes  # cluster node 확인

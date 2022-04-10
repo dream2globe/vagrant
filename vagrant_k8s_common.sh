@@ -56,4 +56,4 @@ sudo apt-get install -y kubelet kubeadm kubectl
 sudo apt-mark hold kubelet kubeadm kubectl
 
 ## ceph dependencies
-sudo apt-get installcd ~/~ -y lvm2
+sudo apt-get install -y lvm2

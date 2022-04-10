@@ -1,1 +1,1 @@
-kubeadm join 192.168.56.20:6443 --token ff2k14.sq7ny6h38kjdk57i --discovery-token-ca-cert-hash sha256:6b1f050e311b4e50cc8db508e4adf9a0aeee55fec0994bf4671dbd84653324c2 
+kubeadm join 192.168.56.20:6443 --token uimi2e.bw6grj9y8kcp05g7 --discovery-token-ca-cert-hash sha256:4c8c4673820ff64cebf1b4f139a4d4b42d0e6b328c126d5298f56e2ccf44c060 
