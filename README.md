@@ -24,9 +24,7 @@ $ vagrant ssh kmaster  # 가상머신 master ssh 접속
 $ k get nodes  # cluster node 확인
 ```
 
-### (Optional)
-
-## MetalLB
+### (Optional)MetalLB
 MetalLB를 사용하면 온프레미스 환경의 K8S에서도 LoadBalance의 IP를 자동으로 할당할 수 있습니다. 자세한 내용은 하위 폴더의 [README.md](./ecos/metallb/README.md)를 참조하세요.
 
 ```bash
