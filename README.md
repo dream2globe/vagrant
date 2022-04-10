@@ -24,13 +24,16 @@ $ vagrant ssh kmaster  # 가상머신 master ssh 접속
 $ k get nodes  # cluster node 확인
 ```
 
-### (Optional)MetalLB
+### (Optional) MetalLB
 MetalLB를 사용하면 온프레미스 환경의 K8S에서도 LoadBalance의 IP를 자동으로 할당할 수 있습니다. 자세한 내용은 하위 폴더의 [README.md](./ecos/metallb/README.md)를 참조하세요.
 
 ```bash
-$ vagrant ssh kmaster  # kamster ssh 접속
+$ vagrant ssh kmaster  # kmaster ssh 접속
 $ sh /vagrant/metallb.sh  # pod 배포
 ```
+
+### (Optional) Rook-Ceph (작성 중)
+Rook-Ceph는 K8S 환경에서 object storage, block storage 등을 프로비저닝 할 수 있는 storage class를 제공합니다. 
 
 ## VM 설정
 PC 사양 및 환경을 고려하여 VM을 조절해아할 수 있습니다. 아래에 주요 설정 항목 및 방법을 설명하였습니다.
