@@ -2,7 +2,7 @@
 Virtual Box와 Vagrant를 사용하여 Kubernetes Cluster를 쉽게 구성하는 방법을 설명합니다. 
 
 ## 환경
-* OS: Ubuntu 20.04
+* OS: Ubuntu 22.04
 * HW: Intel 10700K, 32GB Memory. 1TB SSD
 
 제 환경과 다르더라도 Vagrantfile를 실행할 수 있는 Windows, Mac OS에서도 적용이 가능해보입니다. (시도해본 분 계시면 알려주세요~)
@@ -10,9 +10,9 @@ Virtual Box와 Vagrant를 사용하여 Kubernetes Cluster를 쉽게 구성하는
 ## 설치 순서
 
 ### K8S Cluster
-Virutal Box와 Vagrant의 사전 설치가 필요합니다. 아래 공식 홈페이지에서 본인에 맞는 release를 설치합니다.
-* [Virutal Box](https://www.virtualbox.org/)
-* [Vagrant](https://www.vagrantup.com/)
+Virutal Box와 Vagrant의 사전 설치가 필요합니다. 아래 글과 공식 홈페이지를 참조하여 본인에 맞는 release를 설치합니다. Ubuntu 22.04에서는 Vagrant 공식 홈페이지 상단의 apt를 이용한 설치에 문제가 있어서 하단의 Amd64(2.2.19) binary를 내려받았습니다. 참고하시기 바랍니다. 
+* [Virutal Box](hhttps://www.how2shout.com/linux/how-to-install-virtualbox-on-ubuntu-22-04-lts-jammy)
+* [Vagrant](https://www.vagrantup.com/) 
 
 다음 프로젝트를 구성할 폴더를 생성하고 VM 설정이 담긴 파일들을 복사합니다. 이후 생성된 폴더로 이동하여 `vagrant up` 명령어를 실행합니다. 모든 작업은 끝났습니다. 1개의 master node와 3개의 worker node로 구성된 cluster가 생성될 때까지 기다리면 됩니다.
 
@@ -29,8 +29,7 @@ $ k get nodes  # cluster node 확인
 MetalLB를 사용하면 온프레미스 환경의 K8S에서도 LoadBalance의 IP를 자동으로 할당할 수 있습니다. 자세한 내용은 하위 폴더의 [README.md](./ecos/metallb/README.md)를 참조하세요.
 
 ```bash
-$ vagrant ssh kmaster  # kmaster ssh 접속
-$ sh /vagrant/metallb.sh  # pod 배포
+$ vagrant ssh kmaster -c "sh /vagrant/metallb.sh"
 ```
 
 ### (Optional) Rook-Ceph (작성 중)
@@ -73,3 +72,5 @@ Vagrant는 VM 전체를 단순한 명령어로 쉽게 제어할 수 있습니다
 
 ## Release
 * (2022.04.10) MetalLB 설정 방법이 추가되었습니다.
+* (2022.05.05) ubuntu 22.04에서 vargrant 사용 시 문제 해결 방법을 추가했습니다. 
+               k8s version update에 따른 컨테이너 런타임 미인식 문제를 수정하였습니다. 

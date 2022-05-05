@@ -18,8 +18,11 @@ sudo sh get-docker.sh
 #sudo groupadd docker
 sudo usermod -aG docker $USER
 newgrp docker
+sudo rm get-docker.sh
 
 # docker 
+sudo rm /etc/containerd/config.toml  # https://github.com/containerd/containerd/issues/4581
+sudo systemctl restart containerd
 sudo mkdir -p /etc/docker
 cat << EOF | sudo tee /etc/docker/daemon.json
 {
@@ -57,3 +60,4 @@ sudo apt-mark hold kubelet kubeadm kubectl
 
 ## ceph dependencies
 sudo apt-get install -y lvm2
+
