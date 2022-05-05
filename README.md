@@ -11,8 +11,8 @@ Virtual Box와 Vagrant를 사용하여 Kubernetes Cluster를 쉽게 구성하는
 
 ### K8S Cluster
 Virutal Box와 Vagrant의 사전 설치가 필요합니다. 아래 글과 공식 홈페이지를 참조하여 본인에 맞는 release를 설치합니다. Ubuntu 22.04에서는 Vagrant 공식 홈페이지 상단의 apt를 이용한 설치에 문제가 있어서 하단의 Amd64(2.2.19) binary를 내려받았습니다. 참고하시기 바랍니다. 
-* [Virutal Box](hhttps://www.how2shout.com/linux/how-to-install-virtualbox-on-ubuntu-22-04-lts-jammy)
-* [Vagrant](https://www.vagrantup.com/) 
+* [Virutal Box](https://www.how2shout.com/linux/how-to-install-virtualbox-on-ubuntu-22-04-lts-jammy)
+* [Vagrant](https://www.vagrantup.com/downloads/) 
 
 다음 프로젝트를 구성할 폴더를 생성하고 VM 설정이 담긴 파일들을 복사합니다. 이후 생성된 폴더로 이동하여 `vagrant up` 명령어를 실행합니다. 모든 작업은 끝났습니다. 1개의 master node와 3개의 worker node로 구성된 cluster가 생성될 때까지 기다리면 됩니다.
 
