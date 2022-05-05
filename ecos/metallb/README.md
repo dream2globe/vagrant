@@ -1,5 +1,5 @@
 # MetalLB Configuration
-MetalLB는 LoadBalance로 노출하려는 service에 ip를 자동으로 할당합니다. 본 문서는 MetalLB의 "Layer 2 Configuration" 방법을 활용하여 할당 가능한 ip 대역을 설정하는 방법을 설명합니다. 자세한 내용은 [MetalLB 홈페이지](https://metallb.universe.tf/)를 참조하세요. 사용한 버전은 (MetalLB v0.12.1) 입니다.
+MetalLB는 LoadBalance로 노출하려는 service에 ip를 자동으로 할당합니다. 본 문서는 MetalLB의 "Layer 2 Configuration" 방법을 활용하여 할당 가능한 ip 대역을 설정하는 방법을 설명합니다. 설치방법 등 자세한 내용은 [MetalLB 홈페이지](https://metallb.universe.tf/)를 참조하세요. 사용한 버전은 (MetalLB v0.12.1) 입니다.
 
 * [Network-확인](#network-확인)
 * [Configmap으로-ip대역-설정](#configmap으로-ip대역-설정)
