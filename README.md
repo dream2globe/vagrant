@@ -90,6 +90,8 @@ kworker1   Ready    <none>          4h13m   v1.25.3
 kworker2   Ready    <none>          4h11m   v1.25.3
 kworker3   Ready    <none>          4h9m    v1.25.3
 ```
+### VM간 파일 공유하기
+`Vagrantfile` 파일이 있는 Host PC의 폴더와 VM 내부의 `/Vagrant` 폴더는 자동으로 마운드 됩니다. 따라서 `/Vagrant` 내부의 모든 파일은 `vagrant up`으로 동시에 생성된 VM의 `/Vagrant`에서 모두 접근 가능합니다. 본 튜토리얼에서도 이러한 특성을 활용하여 kmaster에서 생성한 `/Vagrant/k8s_join.sh`를 모든 kworker에서 실행하여 클러스터에 등록하는 것을 확인할 수 있습니다. 
 
 ## Release
 * (2022.04.10) MetalLB 설정 방법을 추가했습니다.
