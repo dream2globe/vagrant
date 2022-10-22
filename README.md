@@ -1,5 +1,4 @@
-# k8s-vms
-Virtual Box와 Vagrant를 사용하여 Kubernetes Cluster를 쉽게 구성하는 방법을 설명합니다. 
+Virtual Box와 Vagrant를 사용하여 Kubernetes Cluster를 쉽게 구성하는 방법입니다. 
 
 ## 환경
 * OS: Ubuntu 22.04
