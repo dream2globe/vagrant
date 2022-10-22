@@ -25,7 +25,7 @@ $ k get nodes  # cluster node 확인
 ```
 
 ### (Optional) MetalLB
-MetalLB를 사용하면 온프레미스 환경의 K8S에서도 LoadBalance의 IP를 자동으로 할당할 수 있습니다. 자세한 내용은 하위 폴더의 [README.md](./ecos/metallb/README.md)를 참조하세요.
+MetalLB를 사용하면 온프레미스 환경의 K8S에서도 LoadBalance의 IP를 자동으로 할당할 수 있습니다. 아래는 설치를 위한 명령어 입니다. 추가 설정 등 자세한 내용은 하위 폴더의 [README.md](./ecos/metallb/README.md)를 참조하세요.
 
 ```bash
 $ vagrant ssh kmaster -c "sh /vagrant/metallb.sh"
@@ -60,7 +60,7 @@ docker의 dockerfile과 유사한 역할로 VM의 Base OS, 사용 자원 등을 
 ### vagrant_k8s_main.sh
 master 노드에만 추가 반영이 필요한 설정이 담겨 있습니다.
 
-## About Vagrant
+## Vagrant 명령어
 Vagrant는 VM 전체를 단순한 명령어로 쉽게 제어할 수 있습니다.
 * `vagrant up`: Vagrantfile을 참조하여 VM을 기동합니다 
 * `vagrant halt`: 모든 VM 정지
@@ -69,7 +69,30 @@ Vagrant는 VM 전체를 단순한 명령어로 쉽게 제어할 수 있습니다
 
 이외 명령어는 [Vagrant Tutorial](https://learn.hashicorp.com/collections/vagrant/getting-started)에 친절하게 소개하고 있으니 꼭 참고해보시길 추천합니다.
 
+## Tips
+### Vagrant client 없이 ssh로 접속하기
+아래의 방법으로 vagrant가 자동으로 설정한 인증키를 복사한 후 ssh에 적용할 수 있습니다. 
+
+```bash
+$ vagrant ssh-config > vagrant-ssh
+$ ssh -F vagrant-ssh vagrant@kmaster 
+```
+
+이러한 방법을 응용하면 scp를 사용하여 kmaster VM의 `~/.kube` 폴더를 호스트 영역으로 복사할 수 있으며,
+복사 이후에는 kmaster VM 내부에 접속하지 않더라도 호스트 영역에서 직접 kubectl로 명령을 내려 k8s 클러스터를 제어할 수 있습니다. 
+
+```bash
+$ scp -r -F vagrant-ssh vagrant@kmaster:/home/vagrant/.kube /home/shyeon/
+$ kubectl
+NAME       STATUS   ROLES           AGE     VERSION
+kmaster    Ready    control-plane   4h16m   v1.25.3
+kworker1   Ready    <none>          4h13m   v1.25.3
+kworker2   Ready    <none>          4h11m   v1.25.3
+kworker3   Ready    <none>          4h9m    v1.25.3
+```
+
 ## Release
-* (2022.04.10) MetalLB 설정 방법이 추가되었습니다.
+* (2022.04.10) MetalLB 설정 방법을 추가했습니다.
 * (2022.05.05) ubuntu 22.04에서 vargrant 사용 시 문제 해결 방법을 추가했습니다. 
-               k8s version update에 따른 컨테이너 런타임 미인식 문제를 수정하였습니다. 
+               k8s version update에 따른 컨테이너 런타임 미인식 문제를 수정했습니다. 
+* (2022.10.22) Tips 설명을 추가했습니다. 
