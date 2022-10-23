@@ -1,8 +1,8 @@
 # MetalLB Configuration
-MetalLB는 LoadBalance로 노출하려는 service에 ip를 자동으로 할당합니다. 본 문서는 MetalLB의 "Layer 2 Configuration" 방법을 활용하여 할당 가능한 ip 대역을 설정하는 방법을 설명합니다. 설치방법 등 자세한 내용은 [MetalLB 홈페이지](https://metallb.universe.tf/)를 참조하세요. 사용한 버전은 `v0.13.7` 입니다.
+MetalLB는 LoadBalance로 노출하려는 service에 ip를 자동으로 할당합니다. 본 문서는 MetalLB의 "Layer 2 Configuration" 방법을 활용하여 할당 가능한 ip 대역을 설정하는 방법을 설명합니다. 설치방법 등 자세한 내용은 [MetalLB 홈페이지](https://metallb.universe.tf/)를 참조하세요. 사용 버전은 `v0.13.7` 입니다.
 
-* [Network-확인](#network-확인)
-* [사용할-ip대역-설정](#사용할-ip대역-설정)
+* [Network 확인](#network-확인)
+* [사용할 ip대역 설정](#사용할-ip대역-설정)
 
 ## Network 확인
 명령어 `ip a s`를 입력하여 VirtualBox가 사용하는 network bridge를 확인합니다.
@@ -39,7 +39,7 @@ $ ip a s
        valid_lft forever preferred_lft forever
 ```
 
-저의 환경에서는 VirtualBox가 vboxnet0을 사용하고 있고 ip 대역이 192.168.56.1/24 임을 알 수 있습니다. 명령어 `sipcalc 192.168.56.1/24`를 입력하여 사용 가능한 ip를 확인합니다.
+제 환경에서는 VirtualBox가 vboxnet0을 사용하며, ip 대역은 192.168.56.1/24 입니다. 명령어 `sipcalc 192.168.56.1/24`를 입력하여 사용 가능한 ip를 확인합니다.
 
 ```bash
 $ sipcalc 192.168.56.1/24
@@ -76,7 +76,6 @@ spec:
 위에서 설정한 ip pool을 적용하기 위해 아래 manifest를 마지막으로 실행합니다.
 
 ```yaml
-$ configmap_to_set_service_ip_range.yaml
 apiVersion: metallb.io/v1beta1
 kind: L2Advertisement
 metadata:
@@ -88,7 +87,8 @@ spec:
 ```
 
 ## 설치 확인
-아래는 설치된 리소스를 확인하는 방법이다.
+
+아래는 설치된 리소스를 확인하는 과정 입니다.
 
 ```bash
 $ kubectl get ipaddresspools.metallb.io -n metallb-system
@@ -100,7 +100,7 @@ NAMESPACE        NAME      IPADDRESSPOOLS   IPADDRESSPOOL SELECTORS   INTERFACES
 metallb-system   example   ["first-pool"]
 ```
 
-아래는 nginx를 배포하여 자동으로 IP가 적용되는 지 확인하는 과정이다.
+nginx를 실제로 배포하여 MetalLB가 잘 동작하는지 확인하는 과정입니다.
 ```bash
 $ kubectl create deploy nginx --image nginx
 deployment.apps/nginx created
@@ -121,4 +121,4 @@ NAME                              DESIRED   CURRENT   READY   AGE
 replicaset.apps/nginx-76d6c9b8c   1         1         1       68s
 ```
 
-배포된 nginx에 External-ip, 192.168.56.240가 자동으로 할당되어 있다. ip pool을 240~250번으로 설정했으므로 expose될 때마다 241번, 242번 순으로 자동 할당된다.
+nginx의 external-ip가 192.168.56.240으로 자동 할당되었습니다. ip pool을 240~250번으로 설정했으므로 deploy가 expose될 때마다 241번, 242번 순으로 자동 할당될 것입니다.
