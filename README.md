@@ -1,10 +1,11 @@
+# 내 PC에 Kubernetes 쉽게 설치하기
 Virtual Box와 Vagrant를 사용하여 Kubernetes Cluster를 쉽게 구성하는 방법입니다. 
 
 ## 환경
 * OS: Ubuntu 22.04
 * HW: Intel 10700K, 32GB Memory. 1TB SSD
 
-제 환경과 다르더라도 Vagrantfile를 실행할 수 있는 Windows, Mac OS에서도 적용이 가능해보입니다. (시도해본 분 계시면 알려주세요~)
+저와 OS 환경과 다르더라도 Windows, Mac에서도 실행이 가능할 것 같습니다. 혹시 시도해보신 분 계시면 저에게도 알려주시면 감사하겠습니다.
 
 ## 설치 순서
 
@@ -25,7 +26,7 @@ $ k get nodes  # cluster node 확인
 ```
 
 ### (Optional) MetalLB
-MetalLB를 사용하면 온프레미스 환경의 K8S에서도 LoadBalance의 IP를 자동으로 할당할 수 있습니다. 아래는 설치를 위한 명령어 입니다. 추가 설정 등 자세한 내용은 하위 폴더의 [README.md](./ecos/metallb/README.md)를 참조하세요.
+MetalLB를 사용하면 온프레미스 환경의 K8S에서도 LoadBalance의 IP를 자동으로 할당할 수 있습니다. 아래는 설치를 위한 명령어 입니다. 추가 설정 등 자세한 내용은 하위 폴더의 [README.md](./metallb/README.md)를 참조하세요.
 
 ```bash
 $ vagrant ssh kmaster -c "sh /vagrant/metallb.sh"
