@@ -1,3 +1,0 @@
-[submodule "ecos/rook"]
-	path = ecos/rook
-	url = https://github.com/rook/rook.git
