@@ -88,7 +88,7 @@ spec:
 
 ## 설치 확인
 
-아래는 설치된 리소스를 확인하는 과정 입니다.
+아래는 설치된 리소스를 확인하는 과정입니다.
 
 ```bash
 $ kubectl get ipaddresspools.metallb.io -n metallb-system
