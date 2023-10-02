@@ -10,13 +10,24 @@ Virtual Box와 Vagrant를 사용하여 Kubernetes Cluster를 쉽게 구성하는
 ## 설치 순서
 
 ### K8S Cluster
-Virutal Box와 Vagrant의 사전 설치가 필요합니다. 아래 글과 공식 홈페이지를 참조하여 본인에 맞는 release를 설치합니다. Ubuntu 22.04에서는 Vagrant 공식 홈페이지 상단의 apt를 이용한 설치에 문제가 있어서 하단의 Amd64(2.2.19) binary를 내려받았습니다. 참고하시기 바랍니다. 
-* [Virutal Box](https://www.how2shout.com/linux/how-to-install-virtualbox-on-ubuntu-22-04-lts-jammy)
+Virutal Box와 Vagrant의 사전 설치가 필요합니다. 아래 글과 공식 홈페이지를 참조하여 본인에 맞는 release를 설치합니다.
+* [Virutal Box](https://www.virtualbox.org/wiki/Linux_Downloads)
+  * 참고로 홈페이지를 통해 설치할 경우 7.0 버전이 설치되나 아래 apt 명령어를 사용하면 6.1 버전이 설치됩니다. 다만 k8s에는 어느 버전을 설치해도 잘 동작합니다. 
+
+```bash
+$ sudo apt install virtualbox
+```
 * [Vagrant](https://www.vagrantup.com/downloads/) 
+
+```bash
+$ wget -O- https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
+$ echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
+$ sudo apt update && sudo apt install vagrant
+```
 
 다음 프로젝트를 구성할 폴더를 생성하고 VM 설정이 담긴 파일들을 복사합니다. 이후 생성된 폴더로 이동하여 `vagrant up` 명령어를 실행합니다. 모든 작업은 끝났습니다. 1개의 master node와 3개의 worker node로 구성된 cluster가 생성될 때까지 기다리면 됩니다.
 
-```
+```bash
 $ git clone https://github.com/dream2globe/k8s-vms.git
 $ cd k8s-vms
 $ export VAGRANT_EXPERIMENTAL="disks"  # 디스크 추가를 위한 실험기능 활성화(ceph 설치 시에만 필요)

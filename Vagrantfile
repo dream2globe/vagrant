@@ -73,7 +73,7 @@ num_node = 3
 
 Vagrant.configure("2") do |config|
   # Base
-  config.vm.box = "ubuntu/focal64"
+  config.vm.box = "ubuntu/jammy64"
 
   # VM config
   config.vm.provider "virtualbox" do |vb|
@@ -107,3 +107,4 @@ Vagrant.configure("2") do |config|
     end
   end
 end
+
