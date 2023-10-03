@@ -8,6 +8,8 @@ Host kmaster
   IdentityFile /home/shyeon/workspace/de/k8s/vagrant/.vagrant/machines/kmaster/virtualbox/private_key
   IdentitiesOnly yes
   LogLevel FATAL
+  PubkeyAcceptedKeyTypes +ssh-rsa
+  HostKeyAlgorithms +ssh-rsa
 
 Host kworker1
   HostName 127.0.0.1
@@ -19,6 +21,8 @@ Host kworker1
   IdentityFile /home/shyeon/workspace/de/k8s/vagrant/.vagrant/machines/kworker1/virtualbox/private_key
   IdentitiesOnly yes
   LogLevel FATAL
+  PubkeyAcceptedKeyTypes +ssh-rsa
+  HostKeyAlgorithms +ssh-rsa
 
 Host kworker2
   HostName 127.0.0.1
@@ -30,6 +34,8 @@ Host kworker2
   IdentityFile /home/shyeon/workspace/de/k8s/vagrant/.vagrant/machines/kworker2/virtualbox/private_key
   IdentitiesOnly yes
   LogLevel FATAL
+  PubkeyAcceptedKeyTypes +ssh-rsa
+  HostKeyAlgorithms +ssh-rsa
 
 Host kworker3
   HostName 127.0.0.1
@@ -41,4 +47,6 @@ Host kworker3
   IdentityFile /home/shyeon/workspace/de/k8s/vagrant/.vagrant/machines/kworker3/virtualbox/private_key
   IdentitiesOnly yes
   LogLevel FATAL
+  PubkeyAcceptedKeyTypes +ssh-rsa
+  HostKeyAlgorithms +ssh-rsa
 

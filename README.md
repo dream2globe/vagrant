@@ -28,33 +28,23 @@ $ sudo apt update && sudo apt install vagrant
 다음 프로젝트를 구성할 폴더를 생성하고 VM 설정이 담긴 파일들을 복사합니다. 이후 생성된 폴더로 이동하여 `vagrant up` 명령어를 실행합니다. 모든 작업은 끝났습니다. 1개의 master node와 3개의 worker node로 구성된 cluster가 생성될 때까지 기다리면 됩니다.
 
 ```bash
-$ git clone https://github.com/dream2globe/k8s-vms.git
-$ cd k8s-vms
-$ export VAGRANT_EXPERIMENTAL="disks"  # 디스크 추가를 위한 실험기능 활성화(ceph 설치 시에만 필요)
+$ git clone https://github.com/dream2globe/vagrant.git
+$ cd vagrant
+$ export VAGRANT_EXPERIMENTAL="disks"  # 디스크 추가를 위한 실험기능 활성화(ceph 설치 시 필요)
 $ vagrant up
 $ vagrant ssh kmaster  # 가상머신 master ssh 접속
 $ k get nodes  # cluster node 확인
 ```
 
-### (Optional) MetalLB
-MetalLB를 사용하면 온프레미스 환경의 K8S에서도 LoadBalance의 IP를 자동으로 할당할 수 있습니다. 아래는 설치를 위한 명령어 입니다. 추가 설정 등 자세한 내용은 하위 폴더의 [README.md](./metallb/README.md)를 참조하세요.
-
-```bash
-$ vagrant ssh kmaster -c "sh /vagrant/metallb.sh"
-```
-
-### (Optional) Rook-Ceph (작성 중)
-Rook-Ceph는 K8S 환경에서 object storage, block storage 등을 프로비저닝 할 수 있는 storage class를 제공합니다. 
-
-## VM 설정
-PC 사양 및 환경을 고려하여 VM을 조절해아할 수 있습니다. 아래에 주요 설정 항목 및 방법을 설명하였습니다.
+## VM 설정 방법
+PC 사양 및 환경을 고려하여 VM을 조절해아할 수 있습니다. 아래에는 각 설정 파일의 주요 항목을 설명하였습니다.
 
 ### Vagrantfile
 docker의 dockerfile과 유사한 역할로 VM의 Base OS, 사용 자원 등을 설정합니다. 
 * num_node = 3
   * 설치될 worker node의 수로, master를 포함하여 총 4개의 node가 설치됨
-* config.vm.box = "ubuntu/focal64"  
-  * Ubuntu 20.04를 VM의 OS로 설치
+* config.vm.box = "ubuntu/jammy64"
+  * Ubuntu 22.04를 VM의 OS로 설치
 * vb.memory = "4096" / vb.cpus = "3"
   * VM에 할당될 메모리와 CPU core 수
   * 4개의 VM이 설치되므로, 총 16GB/12core가 할당됨
@@ -92,15 +82,16 @@ $ ssh -F vagrant-ssh vagrant@kmaster
 
 이러한 방법을 응용하면 scp를 사용하여 kmaster VM의 `~/.kube` 폴더를 호스트 영역으로 복사할 수 있으며,
 복사 이후에는 kmaster VM 내부에 접속하지 않더라도 호스트 영역에서 직접 kubectl로 명령을 내려 k8s 클러스터를 제어할 수 있습니다. 
+※ 호스트에 kubectl 설치 방법은 [여기 링크](https://kubernetes.io/ko/docs/tasks/tools/install-kubectl-linux/)를 참고하세요.
 
 ```bash
 $ scp -r -F vagrant-ssh vagrant@kmaster:/home/vagrant/.kube /home/shyeon/
-$ kubectl
-NAME       STATUS   ROLES           AGE     VERSION
-kmaster    Ready    control-plane   4h16m   v1.25.3
-kworker1   Ready    <none>          4h13m   v1.25.3
-kworker2   Ready    <none>          4h11m   v1.25.3
-kworker3   Ready    <none>          4h9m    v1.25.3
+❯ kubectl get nodes
+NAME       STATUS   ROLES           AGE    VERSION
+kmaster    Ready    control-plane   7h6m   v1.28.2
+kworker1   Ready    <none>          7h5m   v1.28.2
+kworker2   Ready    <none>          7h3m   v1.28.2
+kworker3   Ready    <none>          7h1m   v1.28.2
 ```
 ### VM간 파일 공유하기
 `Vagrantfile` 파일이 있는 Host PC의 폴더와 VM 내부의 `/Vagrant` 폴더는 자동으로 마운드 됩니다. 따라서 `/Vagrant` 내부의 모든 파일은 `vagrant up`으로 동시에 생성된 VM의 `/Vagrant`에서 모두 접근 가능합니다. 본 튜토리얼에서도 이러한 특성을 활용하여 kmaster에서 생성한 `/Vagrant/k8s_join.sh`를 모든 kworker에서 실행하여 클러스터에 등록하는 것을 확인할 수 있습니다. 
@@ -108,6 +99,6 @@ kworker3   Ready    <none>          4h9m    v1.25.3
 ## Release
 * (2022.04.10) MetalLB 설정 방법을 추가했습니다.
 * (2022.05.05) ubuntu 22.04에서 vargrant 사용 시 문제 해결 방법을 추가했습니다. 
-               k8s version update에 따른 컨테이너 런타임 미인식 문제를 수정했습니다. 
+               k8s version upgrade에 따른 컨테이너 런타임 미인식 문제를 수정했습니다. 
 * (2022.10.22) Tips 설명을 추가했습니다. 
 * (2023.10.02) k8s version 1.28.2를 감안하여 설치 명령어를 수정했습니다. 
